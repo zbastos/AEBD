@@ -15,3 +15,10 @@ CREATE USER utilizadorGrupo
     TEMPORARY TABLESPACE aebd_temp_project;
     
 GRANT CONNECT TO utilizadorGrupo;
+
+GRANT create session, create table, create view, create procedure, create synonym,
+      alter any table, alter any procedure,
+      drop any table, drop any view, drop any procedure, drop any synonym
+      to utilizadorGrupo;
+
+ALTER USER utilizadorGrupo QUOTA 100M ON AEBD_TABLES_PROJECT;
