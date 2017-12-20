@@ -29,14 +29,49 @@ criar tabelas no utilizadorGrupo
 CREATE TABLE Tablespace 
     id
     name
-    used
-    free
-    total
+    used MB
+    free MB
+    total MB
     percentage free
     
 CREATE TABLE Datafile
     id 
     tablespaceName
     filename
-    size
+    size in bytes
+    
+CREATE TABLE User
+    id
+    process
+    username
+    sid
+    osuser
+    terminal
+    machine
+    
+CREATE TABLE Memory
+    id
+    username
+    session_ID
+    mem_used
+    
+CREATE TABLE Session
+    id
+    username
+    ouser
+    sid
+    serialN
+    sessionPID
+    status
+    module
+    machine
+    program
+    
+CREATE TABLE CPU
+    id
+    username
+    sid
+    serialN
+    cpuUsage
+
 */

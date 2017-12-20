@@ -35,3 +35,56 @@ SELECT TABLESPACE_NAME, FILE_NAME, BYTES
     FROM DBA_DATA_FILES;
     
 --Users
+SELECT process, username, sid, osuser, terminal, machine
+    FROM v$session
+    ORDER BY process;
+    
+--Memory
+SELECT username, sess.SID, SUM (VALUE) sess_mem
+    FROM v$session sess, v$sesstat stat, v$statname NAME
+   WHERE sess.SID = stat.SID
+     AND stat.statistic# = NAME.statistic#
+     AND NAME.NAME LIKE 'session % memory'
+GROUP BY username, sess.SID;
+    
+--Sessions
+SELECT NVL(s.username, '(oracle)') AS username,
+       s.osuser,
+       s.sid,
+       s.serial#,
+       p.spid,
+       s.status,
+       s.service_name,
+       s.module,
+       s.machine,
+       s.program,
+       TO_CHAR(s.logon_Time,'DD-MON-YYYY HH24:MI:SS') AS logon_time,
+       s.last_call_et AS last_call_et_secs
+FROM   v$session s,
+       v$process p
+WHERE  s.paddr = p.addr
+ORDER BY s.username, s.osuser;  
+   
+--CPU
+select 
+   ss.username,
+   se.SID,
+   ss.serial#,
+   VALUE/100 cpu_usage_seconds
+from
+   v$session ss, 
+   v$sesstat se, 
+   v$statname sn
+where
+   se.STATISTIC# = sn.STATISTIC#
+and
+   NAME like '%CPU used by this session%'
+and
+   se.SID = ss.SID
+and 
+   ss.status='ACTIVE'
+and 
+   ss.username is not null
+order by VALUE desc;
+
+
