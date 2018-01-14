@@ -87,4 +87,3 @@ and
    ss.username is not null
 order by VALUE desc;
 
-
