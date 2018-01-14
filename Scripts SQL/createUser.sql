@@ -10,19 +10,19 @@ CREATE TEMPORARY TABLESPACE aebd_temp_project
     SIZE 50M
     AUTOEXTEND ON;
 
-CREATE USER utilizadorGrupo
-    IDENTIFIED BY passGrupo
+CREATE USER aebdProj
+    IDENTIFIED BY aebd
     DEFAULT TABLESPACE aebd_tables_project 
     TEMPORARY TABLESPACE aebd_temp_project;
     
-GRANT CONNECT TO utilizadorGrupo;
+GRANT CONNECT TO aebdProj;
 
 GRANT create session, create table, create view, create procedure, create synonym,
       alter any table, alter any procedure,
       drop any table, drop any view, drop any procedure, drop any synonym
-      to utilizadorGrupo;
+      to aebdProj;
 
-ALTER USER utilizadorGrupo QUOTA 100M ON AEBD_TABLES_PROJECT;
+ALTER USER aebdProj QUOTA 100M ON AEBD_TABLES_PROJECT;
 
 /*
 criar tabelas no utilizadorGrupo
