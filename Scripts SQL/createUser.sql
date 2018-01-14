@@ -28,7 +28,7 @@ ALTER USER aebdProj QUOTA 100M ON AEBD_TABLES_PROJECT;
 /*Verificar se o aebdProj funciona*/
 SELECT username, account_status FROM dba_users;
 
-/*Grants necessï¿½rios para o aebdProj funcionar*/
+/*Grants necessários para o aebdProj funcionar*/
 GRANT ALL ON DBA_DATA_FILES TO aebdProj;
 GRANT ALL ON dba_free_space TO aebdProj;
 GRANT ALL ON v TO aebdProj;
@@ -41,6 +41,7 @@ grant select on V_$process to aebdProj;
 grant select on v_$sesstat to aebdProj; 
 grant select on v_$statname to aebdProj;
 
+/*Testes para verificar tabelas do aebdProj*/
 CREATE SEQUENCE s START WITH 500 INCREMENT BY 1;
 
 CREATE TABLE t2 AS SELECT LEVEL id FROM dual CONNECT BY LEVEL < = 8;
