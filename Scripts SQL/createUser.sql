@@ -25,57 +25,34 @@ GRANT create session, create table, create view, create procedure, create synony
 
 ALTER USER aebdProj QUOTA 100M ON AEBD_TABLES_PROJECT;
 
+/*Verificar se o aebdProj funciona*/
 SELECT username, account_status FROM dba_users;
 
-/*
-criar tabelas no utilizadorGrupo
-CREATE TABLE Tablespace 
-    id  
-    name
-    used MB
-    free MB
-    total MB
-    percentage free
-    PRIMARY KEY id
-    
-CREATE TABLE Datafile
-    id 
-    tablespaceName
-    filename
-    size in bytes
-    
-CREATE TABLE User
-    id
-    process
-    username
-    sid
-    osuser
-    terminal
-    machine
-    
-CREATE TABLE Memory
-    id
-    username
-    session_ID
-    mem_used
-    
-CREATE TABLE Session
-    id
-    username
-    ouser
-    sid
-    serialN
-    sessionPID
-    status
-    module
-    machine
-    program
-    
-CREATE TABLE CPU
-    id
-    username
-    sid
-    serialN
-    cpuUsage
+/*Grants necess�rios para o aebdProj funcionar*/
+GRANT ALL ON DBA_DATA_FILES TO aebdProj;
+GRANT ALL ON dba_free_space TO aebdProj;
+GRANT ALL ON v TO aebdProj;
+GRANT ALL ON CpuUsage TO aebdProj;
+GRANT ALL ON Sessions TO aebdProj;
+GRANT ALL ON Users TO aebdProj;
+GRANT ALL ON Tablespaces To aebdProj;
+grant select on V_$SESSION to aebdProj;
+grant select on V_$process to aebdProj;
+grant select on v_$sesstat to aebdProj; 
+grant select on v_$statname to aebdProj;
 
-*/
+CREATE SEQUENCE s START WITH 500 INCREMENT BY 1;
+
+CREATE TABLE t2 AS SELECT LEVEL id FROM dual CONNECT BY LEVEL < = 8;
+
+UPDATE t2 SET ID = s.nextval;
+
+SELECT * FROM t2;
+
+CREATE TABLE t3 AS SELECT LEVEL id FROM dual CONNECT BY LEVEL < = 8;
+UPDATE t3 SET ID = s.nextval;
+SELECT * from t3;
+
+GRANT ALL ON t3 TO aebdProj;
+
+
