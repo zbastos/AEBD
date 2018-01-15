@@ -12,10 +12,7 @@ https://netbeans.org/kb/docs/websvc/rest_pt_BR.html
 Para pôr o rest a funcionar é preciso ter o netbeans com os plugins: 
 -java ee
 -rest services
--Instalar o oracle weblogic server 
-Ler o README do Oracle WebLogic Server 12.2.1.3  Quick Installer !!!
-Bastante importante por causa dos path dos jdk e wlserver
-http://www.oracle.com/technetwork/articles/soa/eisele-weblogic-netbeans-2193786.html
+-Instalar o Glassfish Server e alterar a porta no domain.xml da 8080 para 9999
 
 
 -Ligar o sql developer ao netbeans para poder obter dados
@@ -24,6 +21,5 @@ http://www.oracle.com/technetwork/articles/soa/eisele-weblogic-netbeans-2193786.
 
 Fazer run no rest e depois botão direito em cima das facades TEST URI
 Deve aparecer um xml no chrome/ internet explorer/ edge
-
 
 Depois é que se passa para o html

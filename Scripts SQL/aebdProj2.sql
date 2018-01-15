@@ -68,10 +68,13 @@ CREATE TABLE Sessions AS(
 
 SELECT * FROM Sessions;
 
---CPU não funciona
+
+
+--CPU
 CREATE TABLE CpuUsage AS(
-select ss.username,
-       se.SID,
+select distinct ss.osuser,
+       ss.username,
+       ss.SID,
        ss.serial#,
        VALUE/100 cpu_usage_seconds
 from sys.v_$session ss, 
@@ -84,32 +87,6 @@ and
 and
      se.SID = ss.SID
 and 
-     ss.status='ACTIVE'
-and 
      ss.username is not null);
-     
+
 SELECT * FROM CPUUSAGE;
-
-SELECT * from t3;
-
-CREATE TABLE CpuUsageTable AS(
-select ss.username,
-       se.SID,
-       ss.serial#,
-       VALUE/100 cpu_usage_seconds,
-       tab.ID
-from v_$session ss, 
-     v_$sesstat se, 
-     v_$statname sn,
-     t3 tab
-where
-     se.STATISTIC# = sn.STATISTIC#
-and
-     NAME like '%CPU used by this session%'
-and
-     se.SID = ss.SID
-and 
-     ss.status='ACTIVE'
-and 
-     ss.username is not null);
-
